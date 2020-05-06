@@ -12,7 +12,8 @@ const H = require('highland');
 //     return Number(x);
 // })
 
-let test = [{name:'jack', age:6},{name:'dave', age:9}, {name:'tom', age:12}]
+// const test = [{name:'jack', age:6},{name:'dave', age:9}, {name:'tom', age:12}]
+const test = [[{name:'jack', age:6},{name:'dave', age:9}, {name:'tom', age:12}],[{name:'jim', age:12}]]
 
 console.log('input to stream', test)
 
@@ -21,12 +22,15 @@ H(test)
 
 //Highland functions, add in anything you want below:
 
-.tap(item => console.log('current item Line 22:',item))
+.tap(item => console.log('current item A:',item))
 // .batchWithTimeOrCount(4000, 2)
 // .doto ( items => console.log ( `First Doto: ${items}` ) )
 // .filter(function (x) {
 //     return x % 2 === 0;
 // })
+    .flatten()
+    .tap(item => console.log('current item B:',item))
+    .ratelimit(1, 1000)
 .flatMap(item =>{
     //flat maps must return a stream
     item.hobby = 'coding'
