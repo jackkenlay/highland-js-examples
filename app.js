@@ -13,9 +13,14 @@ const H = require('highland');
 // })
 
 // const test = [{name:'jack', age:6},{name:'dave', age:9}, {name:'tom', age:12}]
+
+
+
 const test = [[{name:'jack', age:6},{name:'dave', age:9}, {name:'tom', age:12}],[{name:'jim', age:12}]]
 
 console.log('input to stream', test)
+
+
 
 H(test)
 .ratelimit(1, 1000) //passes objects down the streams 1 per second
@@ -23,11 +28,11 @@ H(test)
 //Highland functions, add in anything you want below:
 
 .tap(item => console.log('current item A:',item))
-// .batchWithTimeOrCount(4000, 2)
-// .doto ( items => console.log ( `First Doto: ${items}` ) )
-// .filter(function (x) {
-//     return x % 2 === 0;
-// })
+.batchWithTimeOrCount(4000, 2)
+.doto ( items => console.log ( `First Doto: ${items}` ) )
+.filter(function (x) {
+    return x % 2 === 0;
+})
     .flatten()
     .tap(item => console.log('current item B:',item))
     .ratelimit(1, 1000)
@@ -40,11 +45,11 @@ H(test)
     item.age = 9;
     return item;
 })
-// .tap(item => console.log('current item line 33:',item))
-// .doto ( items => console.log ( `Second Doto: ${items}` ) )
-// .consume(function (err, x, push, next) {
-//     console.log('consume');
-// });
+.tap(item => console.log('current item line 33:',item))
+.doto ( items => console.log ( `Second Doto: ${items}` ) )
+.consume(function (err, x, push, next) {
+    console.log('consume');
+})
 .collect()
 .toCallback((err, result)=>{
     console.log('end of stream', result)
