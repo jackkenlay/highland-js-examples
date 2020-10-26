@@ -49,6 +49,7 @@ H(first)
     })
     .collect()
     .toCallback((err, result)=>{
+        console.log('Expected Output:')
         console.log('end of stream', result)
     })
 

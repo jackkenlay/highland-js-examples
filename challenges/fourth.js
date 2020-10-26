@@ -1,7 +1,7 @@
 const H = require('highland');
 
 
-// Create a stream that products the desired result
+// Create a stream that produces the desired result
 
 const inputArr = [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10]]
 
@@ -47,6 +47,7 @@ H(inputArr)
     .flatten()
     .collect()
     .toCallback((err, result)=>{
+        console.log('Expected Output:')
         console.log('end of stream', result)
     })
 

@@ -30,8 +30,13 @@ const first = [1,2,3,4,5,6,7,8,9,10]
 
 
 
-
-
+/*
+todo
+the error thing
+collect
+map
+flatmap
+ */
 
 
 
@@ -48,7 +53,8 @@ H(first)
     })
     .collect()
     .toCallback((err, result)=>{
-        console.log('end of stream', result)
+        console.log('Expected Output:')
+        console.log(result)
     })
 
 
