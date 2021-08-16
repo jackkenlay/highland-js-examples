@@ -1,6 +1,6 @@
 const H = require('highland')
 
-const testArr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+const testArr = [...Array(1000).keys()]
 
 
 /*
@@ -9,15 +9,17 @@ Parallel vs Merge or MergeWithLimit
 
 const exampleHTTPRequest = (item,cb) => {
     // takes 5 seconds if its item 1
-    let time = 1000;
+    let time = 100;
     if(item === 1){
-        time = 5000
+        time = 400
     }
 
     return setTimeout(()=>{
         cb(null,item)
     },time)
 }
+
+const CONCURRENT_STREAMS = 50;
 
 (async () => {
     console.log('Beginning parallel vs mergeWithLimit test')
@@ -28,7 +30,7 @@ const exampleHTTPRequest = (item,cb) => {
         //     console.log('parallel item a: ',item)
         // })
         .map(H.wrapCallback(exampleHTTPRequest))
-        .parallel(2)
+        .parallel(CONCURRENT_STREAMS)
         // .tap(item =>{
         //     console.log('item c: ',item)
         // })
@@ -52,7 +54,7 @@ const exampleHTTPRequest = (item,cb) => {
         //     console.log('mergeWithLimit item a: ',item)
         // })
         .map(H.wrapCallback(exampleHTTPRequest))
-        .mergeWithLimit(2)
+        .mergeWithLimit(CONCURRENT_STREAMS)
         // .tap(item =>{
         //     console.log('item c: ',item)
         // })
