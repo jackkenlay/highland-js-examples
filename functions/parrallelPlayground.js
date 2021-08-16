@@ -28,25 +28,25 @@ const exampleHTTPRequest = (item,cb) => {
 // scenario with parallel
 //
 // // const streamOutputExample = H()
-// return H([1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16])
-//     .tap(item =>{
-//         console.log('item a: ',item)
-//     })
-//     .map(H.wrapCallback(exampleHTTPRequest))
-//     .tap(item =>{
-//         console.log('item c: ',item)
-//     })
-//     .parallel(4)
-//     .tap(item =>{
-//         console.log('item c: ',item)
-//     })
-//     .collect()
-//     .toCallback((err ,item) => {
-//         if(err) console.log('ERROR',err)
-//         console.log('END ITEM')
-//         console.log(item)
-//         console.timeEnd("test");
-//     })
+return H([1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16])
+    .tap(item =>{
+        console.log('item a: ',item)
+    })
+    .map(H.wrapCallback(exampleHTTPRequest))
+    .tap(item =>{
+        console.log('item c: ',item)
+    })
+    .parallel(4)
+    .tap(item =>{
+        console.log('item c: ',item)
+    })
+    .collect()
+    .toCallback((err ,item) => {
+        if(err) console.log('ERROR',err)
+        console.log('END ITEM')
+        console.log(item)
+        console.timeEnd("test");
+    })
 
 
 const exampleStreamEmitting = () => {
