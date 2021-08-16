@@ -1,6 +1,6 @@
 const H = require('highland')
 
-const testArr = [...Array(1000).keys()]
+const testArr = [...Array(10000).keys()]
 
 
 /*
@@ -9,13 +9,13 @@ Parallel vs Merge or MergeWithLimit
 
 const exampleHTTPRequest = (item,cb) => {
     // takes 5 seconds if its item 1
-    let time = 100;
+    let time = 50;
 
     // varying request times
-    // if(item % 2 === 1){
+    if(item % 2 === 1){
 
-    if(item === 1){
-        time = 120
+    // if(item === 1){
+        time = 60
     }
 
     return setTimeout(()=>{
